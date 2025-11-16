@@ -1,43 +1,146 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Testing
-coverage/
-
-# Production
-build/
-dist/
-
-# Environment variables
+# ===========================
+# 환경 설정 파일 (민감 정보)
+# ===========================
 .env
 .env.local
+.env.production
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
+*.env
 
-# Logs
+# API 키 및 비밀 정보
+secrets.json
+credentials.json
+config.secret.js
+*-secret.*
+
+# ===========================
+# 데이터베이스
+# ===========================
+*.db
+*.sqlite
+*.sqlite3
+database/*.db
+database/*.sqlite
+database/backups/
+
+# ===========================
+# Python 관련 (백엔드)
+# ===========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+
+# ===========================
+# Node.js / React 관련
+# ===========================
+node_modules/
+.pnp
+.pnp.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-logs/
-*.log
+lerna-debug.log*
+.pnpm-debug.log*
+frontend/node_modules/
+frontend/build/
+frontend/dist/
 
-# Editor directories and files
+# ===========================
+# IDE 및 에디터
+# ===========================
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
+*.swp
+*.swo
 *.sw?
-
-# OS
+*~
+.DS_Store
 Thumbs.db
 
-# Misc
+# ===========================
+# 로그 및 임시 파일
+# ===========================
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.cache
+temp/
+tmp/
+
+# ===========================
+# Supabase
+# ===========================
+supabase/.env
+supabase/config.toml
+supabase/.temp/
+supabase/.branches/
+
+# ===========================
+# 업로드된 파일 (로컬 개발)
+# ===========================
+uploads/
+media/
+static/media/
+
+# ===========================
+# 테스트 커버리지
+# ===========================
+coverage/
+*.cover
+.hypothesis/
+
+# ===========================
+# 빌드 결과물
+# ===========================
+build/
+dist/
 *.tsbuildinfo
 .eslintcache
+
+# ===========================
+# 기타
+# ===========================
+.vercel
+.netlify
+.firebase/
+.aws/
+*.pid
+*.seed
+*.pid.lock
