@@ -1,19 +1,20 @@
 {
   "project": {
-    "name": "agentic-coding",
+    "name": "adventure-log",
     "mode": "personal",
     "locale": "ko",
-    "language": "python",
+    "language": "typescript",
     "language_detection": {
-      "detected_language": "python",
-      "detection_method": "user_selection",
+      "detected_language": "typescript",
+      "detection_method": "package.json analysis",
       "confidence": "high",
-      "markers": ["FastAPI", "SQLite", "Pydantic"],
-      "confirmed_by": "user"
+      "markers": ["React", "TypeScript", "Vite", "Supabase"],
+      "confirmed_by": "project-manager"
     },
-    "description": "Adventure Log - 맛집 탐방 기록 및 개인 메모 관리 시스템. 무료 오픈소스 기반 구축으로 비용 최소화",
-    "owner": "@user",
+    "description": "Adventure Log - 맛집 탐방 기록 및 개인 메모 관리 시스템. React + Supabase 기반 하이브리드 아키텍처로 구축",
+    "owner": "@sungmoon2",
     "created_at": "2025-11-15 13:53:29",
+    "updated_at": "2025-11-16",
     "initialized": true,
     "optimized": false
   },
