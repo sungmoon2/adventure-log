@@ -1,146 +1,131 @@
-# ===========================
-# 환경 설정 파일 (민감 정보)
-# ===========================
-.env
-.env.local
-.env.production
-.env.development
-.env.development.local
-.env.test.local
-.env.production.local
-*.env
-
-# API 키 및 비밀 정보
-secrets.json
-credentials.json
-config.secret.js
-*-secret.*
-
-# ===========================
-# 데이터베이스
-# ===========================
-*.db
-*.sqlite
-*.sqlite3
-database/*.db
-database/*.sqlite
-database/backups/
-
-# ===========================
-# Python 관련 (백엔드)
-# ===========================
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv/
+<<<<<<< HEAD
+# Build artifacts
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
 *.egg
+
+# Cache
+__pycache__/
 .pytest_cache/
-.mypy_cache/
-.coverage
-htmlcov/
-.ruff_cache/
-
-# ===========================
-# Node.js / React 관련
-# ===========================
+*.pyc
+*.pyo
 node_modules/
-.pnp
-.pnp.js
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-frontend/node_modules/
-frontend/build/
-frontend/dist/
+*.tsbuildinfo
+.tscache/
 
-# ===========================
-# IDE 및 에디터
-# ===========================
-.vscode/*
-!.vscode/extensions.json
+# Backups
+.moai-backups/
+*.backup/
+*-backup/
+*_backup_*/
+hooks_backup_*/
+docs_backup_*/
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# IDE
+.vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 *.swp
 *.swo
-*.sw?
 *~
+
+# OS
 .DS_Store
 Thumbs.db
 
-# ===========================
-# 로그 및 임시 파일
-# ===========================
+# Logs
 *.log
 logs/
+
+# Temporary files
 *.tmp
 *.temp
 *.bak
 *.backup
-*.cache
-temp/
-tmp/
 
-# ===========================
-# Supabase
-# ===========================
-supabase/.env
-supabase/config.toml
-supabase/.temp/
-supabase/.branches/
+# Test coverage
+.coverage
+coverage.json
 
-# ===========================
-# 업로드된 파일 (로컬 개발)
-# ===========================
-uploads/
-media/
-static/media/
+# Next.js build output
+docs/.next/
+docs/out/
 
-# ===========================
-# 테스트 커버리지
-# ===========================
-coverage/
-*.cover
-.hypothesis/
+# Claude and MoAI configuration (user-specific, root only)
+# Package templates (src/moai_adk/templates/) are tracked
+/CLAUDE.md
 
-# ===========================
-# 빌드 결과물
-# ===========================
-build/
-dist/
-*.tsbuildinfo
-.eslintcache
+# MoAI dynamic content (로컬 프로젝트만 무시, but package templates are tracked)
+.moai/logs/
+.moai/temp/
+.moai/*.tmp
+.moai/reports/*.tmp
+.moai/reports/*-draft.*
 
-# ===========================
-# 기타
-# ===========================
-.vercel
-.netlify
+# MoAI reports (임시 보고서만 무시)
+.moai/reports/*.tmp
+.moai/reports/*-draft.*
+
+# Environment variables and deployment secrets
+.env*
+.vercel/
+.netlify/
 .firebase/
 .aws/
-*.pid
-*.seed
-*.pid.lock
+.mypy_cache
+.playwright-mcp
+.ruff_cache
+.uv_cache
+.uv-cache
+.venv_issue43_py313
+=======
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+Thumbs.db
+
+# Misc
+*.tsbuildinfo
+.eslintcache
+>>>>>>> 6dbbf22ca45bc0da70ec57ab568bb266a7a0b3b1

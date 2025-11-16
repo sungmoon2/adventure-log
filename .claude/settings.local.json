@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find .claude/commands/alfred -name \"*.md\" -exec grep -l \"model:\" {} ;)",
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(git init)",
+      "Bash(git fetch origin)",
+      "Bash(git pull origin main --allow-unrelated-histories)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7",
+    "playwright",
+    "sequential-thinking"
+  ]
+}
