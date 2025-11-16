@@ -1,0 +1,35 @@
+{
+  "project": {
+    "name": "agentic-coding",
+    "mode": "personal",
+    "locale": "ko",
+    "language": "python",
+    "language_detection": {
+      "detected_language": "python",
+      "detection_method": "user_selection",
+      "confidence": "high",
+      "markers": ["FastAPI", "SQLite", "Pydantic"],
+      "confirmed_by": "user"
+    },
+    "description": "Adventure Log - 맛집 탐방 기록 및 개인 메모 관리 시스템. 무료 오픈소스 기반 구축으로 비용 최소화",
+    "owner": "@user",
+    "created_at": "2025-11-15 13:53:29",
+    "initialized": true,
+    "optimized": false
+  },
+  "language": {
+    "conversation_language": "ko",
+    "conversation_language_name": "한국어",
+    "agent_prompt_language": "en",
+    "notes": "Language for sub-agent internal prompts (english=global standard, localized=user's conversation language)"
+  },
+  "moai": {
+    "version": "0.25.7",
+    "update_check_frequency": "daily",
+    "version_check": {
+      "enabled": true,
+      "cache_ttl_hours": 24
+    }
+  },
+  "user": {}
+}
