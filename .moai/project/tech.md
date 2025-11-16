@@ -1,48 +1,66 @@
-# Technical Document - Adventure Log
+# 기술 명세서 (Technical Specification)
 
 ## 🛠️ 기술 스택
 
 ### Frontend
 
-#### Core Framework
-- **React** `19.1.1` - UI 라이브러리
-- **TypeScript** `5.9.3` - 타입 안정성
-- **Vite** `7.1.7` - 빌드 도구 및 개발 서버
+#### 핵심 기술
+- **Language**: TypeScript 5.9.3
+- **Framework**: React 19.1.1
+- **Build Tool**: Vite 7.1.7
+- **Package Manager**: npm 10.x
 
-#### UI & Styling
-- **Tailwind CSS** `4.1.15` - Utility-first CSS framework
-- **Framer Motion** `12.23.24` - 애니메이션 라이브러리
-- **Lucide React** `0.546.0` - 아이콘 라이브러리
+#### UI/UX 라이브러리
+- **Styling**: Tailwind CSS 4.1.15
+- **Animation**: Framer Motion 12.23.24
+- **Icons**: Lucide React 0.546.0
+- **Components**: Custom Component Library
 
-#### State Management & Data Fetching
-- **TanStack Query** `5.90.5` - 서버 상태 관리 및 캐싱
-- **React Hook Form** `7.65.0` - 폼 상태 관리 및 유효성 검사
-- **React Router DOM** `7.9.4` - 클라이언트 라우팅
+#### 상태 관리 및 데이터
+- **Routing**: React Router DOM 7.9.4
+- **Data Fetching**: TanStack Query 5.90.5
+- **Form Management**: React Hook Form 7.65.0
+- **State Management**: React Context + Hooks
+
+#### 개발 도구
+- **Linting**: ESLint 9.36.0
+- **Type Checking**: TypeScript ESLint 8.45.0
+- **Formatting**: Prettier (planned)
+- **Testing**: Vitest (planned)
 
 ### Backend (BaaS)
 
-#### Supabase Stack
-- **PostgreSQL** `15.x` - 관계형 데이터베이스
-- **Supabase Auth** - 인증 서비스 (Google OAuth)
-- **Supabase Storage** - 파일 스토리지 (이미지)
-- **Supabase Realtime** - 실시간 데이터 동기화
-- **PostgREST** - RESTful API 자동 생성
+#### Supabase Platform
+- **Version**: 2.76.1
+- **Database**: PostgreSQL 15
+- **Authentication**: Supabase Auth (Google OAuth)
+- **Storage**: Supabase Storage
+- **Realtime**: WebSocket subscriptions
+- **Edge Functions**: Deno runtime (planned)
 
 ### DevOps & Infrastructure
 
-#### Hosting
-- **Vercel** - Frontend 호스팅 및 자동 배포
-- **Supabase Cloud** - Backend 인프라 (Free Tier)
+#### 호스팅 및 배포
+- **Frontend Hosting**: Vercel
+- **Database Hosting**: Supabase Cloud
+- **Domain**: Custom domain (planned)
+- **SSL**: Auto-provisioned
 
-#### Build & Bundle
-- **Vite** - 번들링 및 최적화
-- **ESBuild** - JavaScript/TypeScript 트랜스파일
-- **PostCSS** - CSS 처리
-- **Autoprefixer** - CSS 벤더 프리픽스
+#### CI/CD
+- **Version Control**: Git + GitHub
+- **CI Pipeline**: GitHub Actions
+- **Deployment**: Vercel Auto-deploy
+- **Branch Strategy**: Git Flow
 
-## 🔧 개발 환경
+#### 모니터링 (Planned)
+- **Application**: Vercel Analytics
+- **Error Tracking**: Sentry
+- **Uptime**: Better Uptime
+- **Logs**: Supabase Dashboard
 
-### 필수 도구
+## 🏗️ 개발 환경 설정
+
+### 필수 요구사항
 ```json
 {
   "node": ">=20.0.0",
@@ -51,300 +69,391 @@
 }
 ```
 
-### IDE 설정
-- **권장 IDE**: Visual Studio Code
-- **필수 확장**:
-  - ESLint
-  - Prettier
-  - TypeScript and JavaScript
-  - Tailwind CSS IntelliSense
-  - Git Lens
-
 ### 환경 변수
-```env
-# .env.local (Frontend)
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
-
-# 환경별 설정
-VITE_ENV=development|staging|production
-VITE_DEBUG=true|false
-```
-
-## 🧪 테스팅 전략
-
-### 테스트 레벨
-
-#### Unit Tests (계획)
-- **도구**: Vitest + React Testing Library
-- **대상**: 유틸리티 함수, Custom Hooks
-- **커버리지 목표**: 80%
-
-#### Integration Tests (계획)
-- **도구**: Playwright
-- **대상**: 주요 사용자 플로우
-- **시나리오**:
-  - 로그인 → 장소 추가 → 검색
-  - 필터링 → 수정 → 삭제
-
-#### E2E Tests (계획)
-- **도구**: Playwright
-- **대상**: Critical Path
-- **환경**: Staging 환경
-
-### 테스트 자동화
 ```bash
-# 테스트 실행 명령어
-npm run test          # Unit tests
-npm run test:e2e      # E2E tests
-npm run test:coverage # Coverage report
+# .env.local (Frontend)
+VITE_SUPABASE_URL=https://[PROJECT_ID].supabase.co
+VITE_SUPABASE_ANON_KEY=[ANON_KEY]
+VITE_APP_URL=http://localhost:5173
+
+# Production
+VITE_APP_URL=https://adventure-log.vercel.app
 ```
 
-## 🚀 빌드 및 배포
+### 개발 서버 실행
+```bash
+# Frontend 개발 서버
+cd frontend
+npm install
+npm run dev
+
+# 테스트 실행
+npm run test
+
+# 빌드
+npm run build
+
+# 프리뷰
+npm run preview
+```
+
+## 🔧 빌드 및 배포
 
 ### 빌드 프로세스
 
-#### Development Build
+#### Frontend 빌드
 ```bash
-cd frontend
-npm install
-npm run dev  # http://localhost:5173
+# TypeScript 컴파일 + Vite 빌드
+npm run build
+
+# 출력 디렉토리: frontend/dist
+# - index.html
+# - assets/
+#   - js/[name].[hash].js
+#   - css/[name].[hash].css
 ```
 
-#### Production Build
-```bash
-npm run build
-# Output: dist/ directory
-# - Minified JavaScript
-# - Optimized CSS
-# - Compressed assets
-```
+#### 최적화 전략
+1. **Code Splitting**
+   - Route-based splitting
+   - Lazy loading components
+   - Dynamic imports
+
+2. **Asset Optimization**
+   - Image compression (WebP)
+   - CSS purging (Tailwind)
+   - JS minification
+
+3. **Caching Strategy**
+   - Content hashing
+   - Service Worker (PWA)
+   - CDN caching
 
 ### 배포 파이프라인
 
-#### Vercel 자동 배포
-1. **GitHub Push** → main branch
-2. **Vercel Build** → 자동 트리거
-3. **Preview Deployment** → PR별 미리보기
-4. **Production Deployment** → main merge 시
-5. **Rollback** → 이전 버전 즉시 복구 가능
+#### GitHub Actions Workflow
+```yaml
+name: CI/CD Pipeline
 
-#### 배포 체크리스트
-- [ ] TypeScript 컴파일 성공
-- [ ] ESLint 검사 통과
-- [ ] 빌드 크기 체크 (< 500KB)
-- [ ] 환경 변수 확인
-- [ ] Supabase 연결 테스트
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: frontend/dist
+```
+
+#### Vercel 배포 설정
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite"
+}
+```
+
+## 🧪 테스트 전략
+
+### 테스트 레벨
+
+#### 1. 단위 테스트 (Unit Tests)
+- **도구**: Vitest + React Testing Library
+- **대상**: Hooks, Utils, Services
+- **목표 커버리지**: 85%
+
+```typescript
+// Example: useAuth.test.ts
+describe('useAuth Hook', () => {
+  it('should return user when authenticated', () => {
+    const { result } = renderHook(() => useAuth());
+    expect(result.current.user).toBeDefined();
+  });
+});
+```
+
+#### 2. 통합 테스트 (Integration Tests)
+- **도구**: Vitest + MSW (API Mocking)
+- **대상**: API 통신, 컴포넌트 상호작용
+- **목표 커버리지**: 70%
+
+#### 3. E2E 테스트 (End-to-End Tests)
+- **도구**: Playwright (planned)
+- **대상**: 핵심 사용자 플로우
+- **시나리오**:
+  - 로그인 → 장소 추가 → 검색 → 수정
+  - 필터링 → 우선순위 변경 → 삭제
+
+### 테스트 자동화
+```bash
+# Pre-commit Hook
+npm run lint && npm run type-check && npm run test
+
+# Pre-push Hook
+npm run test:coverage
+
+# CI Pipeline
+npm run test:ci
+```
 
 ## 🔐 보안 요구사항
 
-### 인증 & 권한
-- **Google OAuth 2.0** 단독 인증
-- **JWT 토큰** 유효기간 1시간
-- **Refresh Token** 7일 유효
-- **Row Level Security** 데이터 격리
+### 인증 및 권한
 
-### 데이터 보호
-- **HTTPS Only** - TLS 1.3
-- **CSP Headers** - XSS 방지
-- **Input Sanitization** - SQL Injection 방지
-- **Rate Limiting** - API 남용 방지
-
-### 시크릿 관리
-- **Environment Variables** - 민감 정보
-- **Vercel Secrets** - 프로덕션 키
-- **No Hardcoding** - 코드에 시크릿 금지
-
-### OWASP Top 10 대응
-1. **Injection**: Prepared statements (Supabase)
-2. **Broken Auth**: OAuth 2.0 + MFA (계획)
-3. **Sensitive Data**: HTTPS + Encryption
-4. **XXE**: JSON only, no XML
-5. **Access Control**: RLS + RBAC
-6. **Misconfiguration**: Security headers
-7. **XSS**: React 자동 이스케이핑
-8. **Deserialization**: Type validation
-9. **Known Vulnerabilities**: Dependabot
-10. **Logging**: Audit trails (계획)
-
-## 📊 성능 요구사항
-
-### Performance Metrics
-- **LCP** (Largest Contentful Paint): < 2.5s
-- **FID** (First Input Delay): < 100ms
-- **CLS** (Cumulative Layout Shift): < 0.1
-- **TTI** (Time to Interactive): < 3.5s
-
-### 최적화 전략
-
-#### Code Splitting
+#### OAuth 2.0 설정
 ```typescript
-// Lazy loading for routes
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Places = lazy(() => import('./pages/Places'));
+// Google OAuth Configuration
+const provider = 'google';
+const redirectTo = `${window.location.origin}/auth/callback`;
+
+await supabase.auth.signInWithOAuth({
+  provider,
+  options: {
+    redirectTo,
+    scopes: 'email profile'
+  }
+});
 ```
 
-#### Image Optimization
-- WebP 포맷 우선
-- Lazy loading 적용
-- Responsive images
-- CDN 캐싱 (Supabase Storage)
+#### Row Level Security (RLS)
+```sql
+-- Users can only access their own data
+CREATE POLICY "Users can view own places" ON places
+  FOR SELECT USING (auth.uid() = user_id);
 
-#### Bundle Optimization
-- Tree shaking
-- Minification
-- Compression (gzip/brotli)
-- Vendor chunk splitting
+CREATE POLICY "Users can insert own places" ON places
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
 
-## 🔍 모니터링 & 로깅
+CREATE POLICY "Users can update own places" ON places
+  FOR UPDATE USING (auth.uid() = user_id);
 
-### Application Monitoring
-```typescript
-// Vercel Analytics 통합
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+CREATE POLICY "Users can delete own places" ON places
+  FOR DELETE USING (auth.uid() = user_id);
 ```
 
-### Error Tracking (계획)
+### 보안 체크리스트
+
+#### Application Security
+- [x] HTTPS 강제
+- [x] CORS 설정
+- [x] CSP Headers
+- [x] XSS Protection
+- [x] SQL Injection Prevention (Supabase)
+- [ ] Rate Limiting
+- [ ] Input Validation
+- [ ] Output Encoding
+
+#### Data Security
+- [x] 전송 중 암호화 (TLS)
+- [x] 저장 시 암호화 (Supabase)
+- [x] PII 최소 수집
+- [ ] GDPR Compliance
+- [ ] 데이터 익명화
+
+#### Infrastructure Security
+- [x] Environment Variables
+- [x] Secure Headers
+- [x] Dependency Scanning
+- [ ] Security Audits
+- [ ] Penetration Testing
+
+## 📊 성능 최적화
+
+### Frontend 최적화
+
+#### Bundle Size 최적화
+```javascript
+// vite.config.ts
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          supabase: ['@supabase/supabase-js'],
+          ui: ['framer-motion', 'lucide-react']
+        }
+      }
+    }
+  }
+}
+```
+
+#### 이미지 최적화
+- Lazy Loading 적용
+- WebP 포맷 사용
+- Responsive Images
+- CDN 캐싱
+
+### Database 최적화
+
+#### 인덱스 전략
+```sql
+-- 자주 사용되는 쿼리 최적화
+CREATE INDEX idx_places_user_id ON places(user_id);
+CREATE INDEX idx_places_priority ON places(priority);
+CREATE INDEX idx_places_category ON places(category);
+CREATE INDEX idx_places_visited ON places(visited);
+```
+
+#### 쿼리 최적화
+- Pagination 적용 (limit/offset)
+- Select 필드 최소화
+- N+1 문제 방지
+
+### 네트워크 최적화
+- HTTP/2 Push
+- Brotli Compression
+- Prefetching/Preloading
+- Service Worker Caching
+
+## 🚨 운영 및 모니터링
+
+### 로깅 전략
+
+#### Application Logs
 ```typescript
-// Sentry 통합
+// 로그 레벨
+enum LogLevel {
+  ERROR = 0,
+  WARN = 1,
+  INFO = 2,
+  DEBUG = 3
+}
+
+// 구조화된 로깅
+logger.info('User action', {
+  action: 'place_created',
+  userId: user.id,
+  placeId: place.id,
+  timestamp: new Date()
+});
+```
+
+#### Error Tracking
+```typescript
+// Sentry Integration (planned)
 Sentry.init({
-  dsn: process.env.VITE_SENTRY_DSN,
-  environment: process.env.VITE_ENV,
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.NODE_ENV,
   tracesSampleRate: 0.1
 });
 ```
 
-### Custom Logging
-```typescript
-// 로깅 유틸리티
-class Logger {
-  info(message: string, data?: any) { }
-  error(message: string, error: Error) { }
-  warn(message: string, data?: any) { }
-  debug(message: string, data?: any) { }
-}
-```
+### 모니터링 메트릭
 
-## 🛠️ 개발 도구 설정
+#### Application Metrics
+- Page Load Time
+- Time to Interactive (TTI)
+- First Contentful Paint (FCP)
+- API Response Time
+- Error Rate
 
-### ESLint Configuration
-```javascript
-// eslint.config.js
-export default {
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
-  rules: {
-    'no-console': 'warn',
-    'no-unused-vars': 'error'
-  }
-};
-```
+#### Business Metrics
+- Daily Active Users (DAU)
+- Places Created/Day
+- Search Queries/Day
+- Average Session Duration
 
-### Prettier Configuration
-```json
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "printWidth": 100
-}
-```
+### Incident Response
 
-### TypeScript Configuration
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true
-  }
-}
-```
+#### Severity Levels
+1. **P1 (Critical)**: 서비스 전체 중단
+2. **P2 (High)**: 핵심 기능 장애
+3. **P3 (Medium)**: 부분 기능 장애
+4. **P4 (Low)**: 마이너 이슈
 
-## 📦 의존성 관리
+#### Response Playbook
+1. **탐지**: 자동 알림 시스템
+2. **분석**: 로그 및 메트릭 확인
+3. **대응**: 롤백 또는 핫픽스
+4. **복구**: 서비스 정상화
+5. **사후분석**: RCA 작성
 
-### 주요 의존성 버전 정책
-- **Major**: 수동 업데이트 (breaking changes 검토)
-- **Minor**: 월 1회 검토 후 업데이트
-- **Patch**: 자동 업데이트 (보안 패치)
-
-### Dependency Audit
-```bash
-# 보안 취약점 검사
-npm audit
-npm audit fix
-
-# 오래된 패키지 확인
-npm outdated
-```
-
-## 🔄 CI/CD 파이프라인
-
-### GitHub Actions (계획)
-```yaml
-name: CI/CD Pipeline
-on: [push, pull_request]
-
-jobs:
-  test:
-    - npm install
-    - npm run lint
-    - npm run type-check
-    - npm run test
-
-  build:
-    - npm run build
-    - Check bundle size
-
-  deploy:
-    - Vercel deployment
-    - Smoke tests
-```
-
-## 📈 기술 부채 관리
+## 🔄 기술 부채 관리
 
 ### 현재 기술 부채
-1. **테스트 코드 부재** - Priority: HIGH
-2. **에러 핸들링 미비** - Priority: MEDIUM
-3. **성능 모니터링 부재** - Priority: MEDIUM
-4. **문서화 부족** - Priority: LOW
 
-### 개선 계획
-- **Q1 2025**: 테스트 인프라 구축
-- **Q2 2025**: 에러 트래킹 도입
-- **Q3 2025**: 성능 최적화
-- **Q4 2025**: 문서 자동화
+#### 높은 우선순위
+- [ ] 테스트 커버리지 부족 (현재 0%)
+- [ ] TypeScript strict mode 미적용
+- [ ] 에러 핸들링 표준화 필요
 
-## 🚨 장애 대응
+#### 중간 우선순위
+- [ ] 컴포넌트 문서화 (Storybook)
+- [ ] 성능 모니터링 도구 부재
+- [ ] 로깅 시스템 구축 필요
 
-### Incident Response Plan
-1. **Detection**: 모니터링 알림
-2. **Triage**: 심각도 평가
-3. **Communication**: 팀 알림
-4. **Resolution**: 문제 해결
-5. **Post-mortem**: 원인 분석
+#### 낮은 우선순위
+- [ ] CSS-in-JS 마이그레이션 검토
+- [ ] 모노레포 구조 전환 검토
+- [ ] GraphQL 도입 검토
 
-### Rollback Strategy
-- Vercel 즉시 롤백 기능
-- Database migration 롤백 스크립트
-- Feature flag를 통한 기능 비활성화
+### 기술 로드맵
 
-## 📝 HISTORY
+#### Q1 2025
+- Vitest 테스트 환경 구축
+- GitHub Actions CI/CD 완성
+- Sentry 에러 트래킹 도입
 
-### 2025-11-16
-- 기술 문서 작성
-- 기술 스택 명세화
-- 보안 요구사항 정의
+#### Q2 2025
+- Storybook 컴포넌트 문서화
+- Performance Budget 설정
+- PWA 기능 구현
 
-### 2025-01-XX
-- 초기 기술 스택 선정
-- 개발 환경 구성
-- CI/CD 파이프라인 설계
+#### Q3 2025
+- React Native 앱 개발
+- GraphQL API 검토
+- 마이크로서비스 아키텍처 검토
+
+## 📚 기술 문서 및 참고자료
+
+### 내부 문서
+- [개발 가이드](./docs/guides/development.md)
+- [API 문서](./docs/api/README.md)
+- [컴포넌트 가이드](./docs/components/README.md)
+
+### 외부 참고자료
+- [React 공식 문서](https://react.dev)
+- [Supabase 문서](https://supabase.com/docs)
+- [TypeScript 핸드북](https://www.typescriptlang.org/docs/)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+
+### 팀 규칙
+- **코드 스타일**: Prettier + ESLint
+- **커밋 메시지**: Conventional Commits
+- **브랜치 전략**: Git Flow
+- **코드 리뷰**: PR 필수
+
+---
+
+**문서 버전**: 1.0.0
+**작성일**: 2025-11-16
+**작성자**: MoAI Project Manager Agent
+**다음 검토일**: 2025-12-01

@@ -47,7 +47,9 @@
       "Bash(npm test -- --run src/hooks/__tests__/useFilters.test.ts)",
       "Bash(npm test -- --run src/features/places/components/__tests__/CategoryFilter.test.tsx)",
       "Bash(git rev-parse --is-inside-work-tree)",
-      "Bash(cat adventure-log/README.md)"
+      "Bash(cat adventure-log/README.md)",
+      "Bash(git rm --cached adventure-log)",
+      "Bash(git submodule add ./adventure-log adventure-log)"
     ]
   },
   "enableAllProjectMcpServers": true,
