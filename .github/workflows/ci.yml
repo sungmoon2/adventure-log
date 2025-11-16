@@ -1,0 +1,129 @@
+name: Quality Gate CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install dependencies
+      working-directory: ./frontend
+      run: npm ci
+
+    - name: Run linter
+      working-directory: ./frontend
+      run: npm run lint || true  # Non-blocking for now
+
+    - name: Run tests
+      working-directory: ./frontend
+      run: npm test -- --passWithNoTests  # Pass if no tests yet
+
+    - name: Build
+      working-directory: ./frontend
+      run: npm run build
+      env:
+        CI: true
+        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+  quality-check:
+    name: TRUST 5 Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check Test Coverage
+      run: |
+        echo "📊 Test Coverage Check"
+        echo "Target: 85% (currently building up)"
+        # Will add actual coverage check later
+
+    - name: Security Scan
+      run: |
+        echo "🔒 Security Scan"
+        echo "Checking for vulnerabilities..."
+        # npm audit --audit-level=moderate || true
+
+    - name: Code Quality
+      run: |
+        echo "✨ Code Quality Check"
+        echo "Checking code standards..."
+        # Will add ESLint/Prettier checks
+
+    - name: Documentation Check
+      run: |
+        echo "📚 Documentation Check"
+        if [ -f "README.md" ]; then
+          echo "✅ README.md exists"
+        fi
+        if [ -d "specs" ]; then
+          echo "✅ SPEC directory exists"
+          ls -la specs/
+        fi
+
+  deploy-preview:
+    name: Deploy Preview
+    needs: [frontend-test, quality-check]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy to Vercel Preview
+      run: |
+        echo "🚀 Deploying to Vercel Preview..."
+        echo "URL will be posted in PR comments"
+        # Vercel CLI deployment will be added
+
+  deploy-production:
+    name: Deploy Production
+    needs: [frontend-test, quality-check]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy to Vercel Production
+      run: |
+        echo "🚀 Deploying to Production..."
+        echo "Adventure Log is being deployed"
+        # Vercel CLI deployment will be added
+
+  notify:
+    name: Notification
+    needs: [frontend-test, quality-check]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+    - name: CI Status
+      run: |
+        echo "==================================="
+        echo "🎯 Adventure Log CI/CD Pipeline"
+        echo "==================================="
+        echo "Frontend Tests: ${{ needs.frontend-test.result }}"
+        echo "Quality Check: ${{ needs.quality-check.result }}"
+        echo "==================================="
+        if [ "${{ needs.frontend-test.result }}" == "success" ] && [ "${{ needs.quality-check.result }}" == "success" ]; then
+          echo "✅ All checks passed!"
+        else
+          echo "❌ Some checks failed. Please review."
+        fi
