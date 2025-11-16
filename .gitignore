@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Build artifacts
 build/
 dist/
@@ -83,3 +84,48 @@ docs/out/
 .uv_cache
 .uv-cache
 .venv_issue43_py313
+=======
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+Thumbs.db
+
+# Misc
+*.tsbuildinfo
+.eslintcache
+>>>>>>> 6dbbf22ca45bc0da70ec57ab568bb266a7a0b3b1
